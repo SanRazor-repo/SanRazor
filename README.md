@@ -81,7 +81,7 @@ source shrc
 ```
 3. Run the following script to evaluate SanRazor on SPEC CPU2006 Benchmark under `spec/`:
 ```
-./run_spec.sh
+./run_spec_SR.sh
 ```
 4. See the evaluation reports under `SPEC_CPU2006v1.0/result`.
 
