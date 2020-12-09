@@ -14,7 +14,7 @@ We run the following command in Ubuntu 18.04 to complete this step:
 ```
 svn co http://llvm.org/svn/llvm-project/llvm/tags/RELEASE_900/final llvm
 cd llvm/tools
-svn co http://llvm.org/svn/llvm-project/cfe/tags/RELEASE_500/final clang
+svn co http://llvm.org/svn/llvm-project/cfe/tags/RELEASE_900/final clang
 cd ..
 cd tools/clang/tools
 svn co http://llvm.org/svn/llvm-project/clang-tools-extra/tags/RELEASE_900/final extra
