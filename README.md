@@ -1,3 +1,7 @@
+# SanRazor
+[![License](https://img.shields.io/github/license/SanRazor-repo/SanRazor)](https://opensource.org/licenses/Apache-2.0)
+
+SanRazor is a practical sanitizer reduction tool. We reuse some code from [ASAP](https://github.com/dslab-epfl/asap).
 # Paper submission
 Code snapshot for accompanying the manuscript "SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs". Our evaluation results can be reproduced from this snapshot. We will provide more documents and instructions to help reproducing the results during the artifact evaluation submission.
 
@@ -5,8 +9,6 @@ Code snapshot for accompanying the manuscript "SanRazor: Reducing Redundant Sani
 1. `src` contains the source code of SanRazor.
 2. `var` contains the evaluation results of SanRazor.
 3. `data` contains all the information for reproducing the evaluation results of SanRazor.
-
-Note: this repository refers to https://github.com/dslab-epfl/asap.
 
 ## Install
 1. Download and install [LLVM](https://llvm.org/docs/GettingStarted.html) and [Clang](https://clang.llvm.org/get_started.html).
