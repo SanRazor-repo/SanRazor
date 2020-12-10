@@ -1,5 +1,6 @@
-# Paper submission
+# SanRazor
 [![License](https://img.shields.io/github/license/SanRazor-repo/SanRazor)](https://opensource.org/licenses/Apache-2.0)
+# Paper submission
 Code snapshot for accompanying the manuscript "SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs". Our evaluation results can be reproduced from this snapshot. We will provide more documents and instructions to help reproducing the results during the artifact evaluation submission.
 
 ## Repository structure
