@@ -44,7 +44,8 @@ sudo make install
 ```
 2. Move the source code of SanRazor into your llvm project:
 ```
-mv src/SRPass llvm/lib/Transforms
+mv src/SRPass llvm/lib/Transforms/
+mv src/SmallPtrSet.h llvm/include/llvm/ADT/
 ```
 3. Add the following command to `CMakeLists.txt` under `llvm/lib/Transforms`:
 ```
