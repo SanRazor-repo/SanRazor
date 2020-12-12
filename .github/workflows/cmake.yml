@@ -1,0 +1,96 @@
+name: CMake
+
+on: [push]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally
+    # well on Windows or Mac.  You can convert this to a matrix build if you need
+    # cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-latest
+    env:
+          BUNDLE_GEMFILE: subdir/mygemfile
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+        bundler-cache: true
+    - run: gem install fileutils
+    - run: gem install parallel
+#     - run: gem install pathname
+    - run: gem install shellwords
+
+    - name: Create Build Environment
+      working-directory: ${{runner.workspace}}
+      # Some projects don't allow in-source building, so create a separate build directory
+      # We'll use this as our working directory for all subsequent commands
+      run: |
+        wget -O llvm.tar.gz https://www.dropbox.com/s/ys6fnkheh4a0k4c/llvm.tar.gz?dl=0
+        tar -xzf llvm.tar.gz
+#       run: |
+#         svn co http://llvm.org/svn/llvm-project/llvm/tags/RELEASE_900/final llvm
+#         cd llvm/tools
+#         svn co http://llvm.org/svn/llvm-project/cfe/tags/RELEASE_900/final clang
+#         cd ..
+#         cd tools/clang/tools
+#         svn co http://llvm.org/svn/llvm-project/clang-tools-extra/tags/RELEASE_900/final extra
+#         cd ../../..
+#         cd projects
+#         svn co http://llvm.org/svn/llvm-project/compiler-rt/tags/RELEASE_900/final compiler-rt
+#         cd ..
+#         cd projects
+#         svn co http://llvm.org/svn/llvm-project/libcxx/tags/RELEASE_900/final libcxx
+#         svn co http://llvm.org/svn/llvm-project/libcxxabi/tags/RELEASE_900/final libcxxabi
+#         cd ..
+#         cd ..
+
+
+#     - name: Configure CMake
+#       # Use a bash shell so we can use the same syntax for environment variable
+#       # access regardless of the host operating system
+#       shell: bash
+#       working-directory: ${{runner.workspace}}
+#       # Note the current convention is to use the -S and -B options here to specify source 
+#       # and build directories, but this is only available with CMake 3.13 and higher.  
+#       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+#       run: 
+        
+    - name: Build
+      # Use a bash shell so we can use the same syntax for environment variable
+      # access regardless of the host operating system
+      shell: bash
+      working-directory: ${{runner.workspace}}
+      # Note the current convention is to use the -S and -B options here to specify source 
+      # and build directories, but this is only available with CMake 3.13 and higher.  
+      # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+      run: |
+        sudo mkdir -p /usr/local/include/llvm
+        cp -r SanRazor/src/SmallPtrSet.h llvm/include/llvm/ADT/
+        cp -r SanRazor/src/CMakeLists.txt llvm/lib/Transforms/
+        cp -r SanRazor/src/SRPass llvm/lib/Transforms/
+        cd llvm
+        rm -rf build
+        mkdir -p build
+        cd build
+        cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="X86" ..
+        make
+        sudo make install
+        
+#     - name: Build
+#       working-directory: ${{runner.workspace}}/build
+#       shell: bash
+#       # Execute the build.  You can specify a specific target with "--target <NAME>"
+#       run: cmake --build . --config $BUILD_TYPE
+
+#     - name: Test
+#       working-directory: ${{runner.workspace}}/build
+#       shell: bash
+#       # Execute tests defined by the CMake configuration.  
+#       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+#       run: ctest -C $BUILD_TYPE
