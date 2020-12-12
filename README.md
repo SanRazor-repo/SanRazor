@@ -1,6 +1,5 @@
 # SanRazor
 [![License](https://img.shields.io/github/license/SanRazor-repo/SanRazor?color=blue)](https://opensource.org/licenses/Apache-2.0)
-[![License](https://img.shields.io/github/workflow/status/SanRazor-repo/SanRazor/CMake)](https://shields.io/category/build)
 ![cmake](https://github.com/SanRazor-repo/SanRazor/workflows/CMake/badge.svg)
 
 SanRazor is a practical sanitizer reduction tool.
