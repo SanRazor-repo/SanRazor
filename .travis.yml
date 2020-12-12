@@ -1,8 +1,0 @@
-language: cpp
-sudo: required
-dist: bionic
-compiler:
-- clang
-os:
-- ubuntu
-ruby: 2.5.1
