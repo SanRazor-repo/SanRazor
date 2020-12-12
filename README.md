@@ -102,6 +102,6 @@ source shrc
 ```
 export SR_STATE_PATH="$(pwd)/Cov"
 export SR_WORK_PATH="<path-to-this-file>/coverage.sh"
-SanRazor-clang -SR-opt
+SanRazor-clang -SR-opt -san-level=<> -use-asap=<>
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j 12
 ```
