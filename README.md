@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/github/license/SanRazor-repo/SanRazor?color=blue)](https://opensource.org/licenses/Apache-2.0)
 ![cmake](https://github.com/SanRazor-repo/SanRazor/workflows/CMake/badge.svg)
 
-SanRazor is a practical sanitizer reduction tool.
+SanRazor is a sanitizer check reduction tool aiming to incur little overhead while retaining all important sanitizer checks.
 # Paper submission
 The code snapshot for accompanying the manuscript "SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs". Our evaluation results can be reproduced from this snapshot. We will provide more documents and instructions to help reproducing the results during the artifact evaluation submission.
 
