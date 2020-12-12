@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/github/license/SanRazor-repo/SanRazor?color=blue)](https://opensource.org/licenses/Apache-2.0)
 [![License](https://img.shields.io/github/workflow/status/SanRazor-repo/SanRazor/CMake)](https://shields.io/category/build)
 
-SanRazor is a practical sanitizer reduction tool. We reuse some code from [ASAP](https://github.com/dslab-epfl/asap).
+SanRazor is a practical sanitizer reduction tool.
 # Paper submission
 The code snapshot for accompanying the manuscript "SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs". Our evaluation results can be reproduced from this snapshot. We will provide more documents and instructions to help reproducing the results during the artifact evaluation submission.
 
@@ -105,3 +105,5 @@ export SR_WORK_PATH="<path-to-this-file>/coverage.sh"
 SanRazor-clang -SR-opt -san-level=<> -use-asap=<>
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j 12
 ```
+## Acknowledgement
+We reuse some code from [ASAP](https://github.com/dslab-epfl/asap).
