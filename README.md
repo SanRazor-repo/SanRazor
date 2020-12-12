@@ -11,6 +11,13 @@ The code snapshot for accompanying the manuscript "SanRazor: Reducing Redundant 
 2. `var` contains the evaluation results of SanRazor.
 3. `data` contains all the information for reproducing the evaluation results of SanRazor.
 
+## Quick install & test
+```
+docker build -f Dockerfile -t sanrazor:latest --shm-size=8g . 
+docker run -it sanrazor:latest
+bash build_autotrace.sh
+```
+
 ## Install
 1. Download and install [LLVM](https://llvm.org/docs/GettingStarted.html) and [Clang](https://clang.llvm.org/get_started.html).
 We run the following command in Ubuntu 18.04 to complete this step:
