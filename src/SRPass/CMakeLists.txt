@@ -13,10 +13,7 @@ endif()
 add_llvm_library( SRPass MODULE BUILDTREE_ONLY
   SCIPass.cpp
   DynamicCallCounter.cpp
-  DynPassL0.cpp
-  DynPassL1.cpp
-  DynPassL2.cpp
-  SafePass.cpp
+  SRAnalysisPass.cpp
   SCClean.cpp
   utils.cpp
   CostModel.cpp

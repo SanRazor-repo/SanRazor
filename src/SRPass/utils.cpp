@@ -1,3 +1,5 @@
+// This file is modified from ASAP, containing some useful functions.
+
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Instructions.h"
 #include "SCIPass.h"

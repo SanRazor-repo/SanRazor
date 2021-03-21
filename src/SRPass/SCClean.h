@@ -1,5 +1,4 @@
-// This file is part of ASAP.
-// Please see LICENSE.txt for copyright and licensing information.
+// This file is used to clean insturctions related to removed sanitizer checks.
 
 #include "llvm/ADT/SmallPtrSet.h"
 #include "llvm/Pass.h"

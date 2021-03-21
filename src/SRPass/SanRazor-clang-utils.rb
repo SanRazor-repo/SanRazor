@@ -1,6 +1,6 @@
 # A number of utility functions for SanRazor-clang
 
-# This file is part of SanRazor.
+# This file is modified from ASAP SanRazor.
 # Please see LICENSE.txt for copyright and licensing information.
  
 require 'shellwords'

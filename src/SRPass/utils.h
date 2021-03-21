@@ -1,3 +1,5 @@
+// This file is modified from ASAP, containing some useful functions.
+
 #ifndef ETHPASS_UTILS_H
 #define	ETHPASS_UTILS_H
 

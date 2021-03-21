@@ -1,3 +1,4 @@
+// This file is from ASAP to get the cost of each check.
 //===- CostModel.cpp ------ Cost Model Analysis ---------------------------===//
 //
 //                     The LLVM Compiler Infrastructure

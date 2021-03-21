@@ -1,3 +1,5 @@
+// This file is used to insert counters before checks, in order to get their dynamic patterns.
+
 #include "llvm/ADT/DenseMap.h"
 #include "llvm/Pass.h"
 
@@ -6,8 +8,6 @@ namespace llvm {
   class Value;
   class AnalysisUsage;
 }
-
-
 
 struct DynamicCallCounter : public llvm::ModulePass {
   static char ID;

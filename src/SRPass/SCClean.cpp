@@ -1,5 +1,4 @@
-// This file is part of ASAP.
-// Please see LICENSE.txt for copyright and licensing information.
+// This file is used to clean insturctions related to removed sanitizer checks.
 
 #include "SCClean.h"
 
@@ -37,7 +36,6 @@ void SCClean::cleanSCInstructions(Instruction *Inst) {
         for (Use &U: I->operands()) {
             if (Instruction *Op = dyn_cast<Instruction>(U.get())) {
                 if (Op->getNumUses()==1) {
-                    // errs() << Op->getOpcodeName() << ":" << Op->getParent()->getName() << "---";
                     Worklist.insert(Op);
                 }
             }
@@ -48,10 +46,9 @@ void SCClean::cleanSCInstructions(Instruction *Inst) {
             I->eraseFromParent();
         }
     }
-    errs() << "\n";
 }
 
 char SCClean::ID = 0;
 
-static RegisterPass<SCClean> X("SCClean",
+static RegisterPass<SCClean> X("scclean",
         "Finds branches belonging to sanity checks and user checks", false, false);

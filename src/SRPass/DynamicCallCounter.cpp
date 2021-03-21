@@ -1,3 +1,5 @@
+// This file is used to insert counters before checks, in order to get their dynamic patterns.
+
 #include "llvm/IR/BasicBlock.h"
 #include "llvm/IR/DerivedTypes.h"
 #include "llvm/IR/IRBuilder.h"
@@ -80,7 +82,7 @@ DynamicCallCounter::runOnModule(Module &m) {
     std::replace(filename.begin(), filename.end(), '-', '_');
     std::replace(filename.begin(), filename.end(), '.', '_');
     std::replace(filename.begin(), filename.end(), '+', '_');
-    errs() << filename << "\n";
+    dbgs() << filename << "\n";
 
   // First identify the functions we wish to track
     std::vector<Instruction*> CountSC;
@@ -88,20 +90,18 @@ DynamicCallCounter::runOnModule(Module &m) {
     SCIPass &SCI = getAnalysis<SCIPass>();
 
     for (Function &F: m) {
-        LLVM_DEBUG(dbgs() << "DynPass on " << F.getName() << "\n");
+        LLVM_DEBUG(dbgs() << "Get SCs (sanitizer checks) and UCs (user checks) on file: " << F.getName() << ".\n");
         for (Instruction *Inst: SCI.getSCBranches(&F)) {
             assert(Inst->getParent()->getParent() == &F && "SCI must only contain instructions of the current function.");
             BranchInst *BI = dyn_cast<BranchInst>(Inst);
             assert(BI && BI->isConditional() && "SCBranches must not contain instructions that aren't conditional branches.");
             CountSC.push_back(BI);
-            // errs() << "S check : " << BI->getSuccessor(0)->getName() << ":" << BI->getSuccessor(1)->getName() << "---";
         }
         for (Instruction *Inst: SCI.getUCBranches(&F)) {
             assert(Inst->getParent()->getParent() == &F && "SCI must only contain instructions of the current function.");
             BranchInst *BI = dyn_cast<BranchInst>(Inst);
             assert(BI && BI->isConditional() && "UCBranches must not contain instructions that aren't conditional branches.");
             CountUC.push_back(BI);
-            // errs() << "U check : " << BI->getSuccessor(0)->getName() << ":" << BI->getSuccessor(1)->getName() << "---";
         }
     }
 
@@ -110,9 +110,7 @@ DynamicCallCounter::runOnModule(Module &m) {
     ids_UC = computeFunctionIDs(CountUC, num_UC);
     auto const numSCBranches = CountSC.size();
     auto const numUCBranches = CountUC.size();
-    // num_SC += CountSC.size();
-    // num_UC += CountUC.size();
-    errs() << m.getSourceFileName() << " :: " << CountSC.size() << " :: " <<CountUC.size()<<"\n";
+    dbgs() << "File name:" << m.getSourceFileName() << ", No. of SCs: " << CountSC.size() << ", No. of UCs: " <<CountUC.size()<<".\n";
 
 
     auto* int64Ty = Type::getInt64Ty(context);
@@ -131,36 +129,33 @@ DynamicCallCounter::runOnModule(Module &m) {
                      GlobalValue::ExternalLinkage,
                      numUCBranchesGlobal,
                      "COUNTER_numUCBranches"+filename);
-    // errs() << "Create BranchInst Table!\n";
+
     createBranchTable(m, CountSC, numSCBranches, "SCBranchInfo"+filename);
     createBranchTable(m, CountUC, numUCBranches, "UCBranchInfo"+filename);
 
-    // errs() << "Generate printer!\n";
+
     Type* voidTy  = Type::getVoidTy(context);
     Value* printerSC = m.getOrInsertFunction("COUNTER_printSC"+filename, voidTy).getCallee();
     appendToGlobalDtors(m, llvm::cast<Function>(printerSC), 0);
     Value* printerUC = m.getOrInsertFunction("COUNTER_printUC"+filename, voidTy).getCallee();
     appendToGlobalDtors(m, llvm::cast<Function>(printerUC), 0);
 
-    // errs() << "Generate counter!\n";
-    // Type* SCType = m.getNamedValue("COUNTER_SCBranchInfo"+filename)->getType();
     FunctionType* countSCTy = FunctionType::get(voidTy, {int64Ty, int64Ty}, false);
     Value* counterSC  = m.getOrInsertFunction("COUNTER_calledSC"+filename, countSCTy).getCallee();
 
-    errs() << "Insert call functions for SC branches in "<<m.getSourceFileName()<<"!\n";
+    dbgs() << "Insert call functions for SC branches in file: "<<m.getSourceFileName()<<"!\n";
     for (Instruction* I : CountSC) {
         handleCalledBranch(m, *I, counterSC, "SC", filename);
     }
 
-    // Type* UCType = m.getNamedValue("COUNTER_UCBranchInfo"+filename)->getType();
     FunctionType* countUCTy = FunctionType::get(voidTy, {int64Ty, int1Ty}, false);
     Value* counterUC  = m.getOrInsertFunction("COUNTER_calledUC"+filename, countUCTy).getCallee();
 
-    errs() << "Insert call functions for UC branches in "<<m.getSourceFileName()<<"!\n";
+    dbgs() << "Insert call functions for UC branches in file: "<<m.getSourceFileName()<<"!\n";
     for (Instruction* I : CountUC) {
         handleCalledBranch(m, *I, counterUC, "UC", filename);
     }
-    errs() << "DCC Pass completed\n";
+    dbgs() << "DCC Pass completed.\n";
 
     return true;
 }
@@ -187,7 +182,6 @@ DynamicCallCounter::handleCalledBranch(Module& m, Instruction& I, Value* counter
         }
         else if (str == "UC") {
             IRBuilder<> builderI(&I);
-            uint64_t type = 0;
             builderI.CreateCall(counter, {builderI.getInt64(ids_UC[&I]), I.getOperand(0)});
         }
     }

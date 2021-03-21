@@ -1,12 +1,9 @@
-// This file is part of ASAP.
-// Please see LICENSE.txt for copyright and licensing information.
+// This file is modified from ASAP, used to identify user checks and sanitizer checks.
+// Note that ASAP only identifies sanitizer checks.
 
 #include "llvm/ADT/SmallPtrSet.h"
 #include "llvm/Pass.h"
 #include "llvm/IR/Instructions.h"
-
-
-
 #include <map>
 #include <set>
 #include <list>
@@ -21,30 +18,6 @@ namespace llvm {
     class StringRef;
     class dyn_cast;
 }
-
-// struct BranchInfo {
-//     static llvm::StringRef BranchName;
-//     void insert(llvm::Instruction *Inst) {
-//         llvm::BranchInst *BI = llvm::dyn_cast<llvm::BranchInst>(Inst);
-//         int first = 0;
-//         if (BI && BI->isConditional()) {
-//             // Insert the first Instruction of each successor BasicBlock into each Instruction in SCBranch 
-//             for (int i=0; i<=1; i++) {
-//                 llvm::BasicBlock *BB = BI->getSuccessor(i);
-//                 first = 0;
-//                 for (llvm::Instruction &I: *BB) {
-//                     first += 1;
-//                     if(first == 1) {
-//                         BranchSet[Inst].insert(&I);
-//                         break;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// private:
-//     std::map<llvm::Instruction*, llvm::SmallPtrSet<llvm::Instruction*, 2>> BranchSet;
-// };
 
 struct SCIPass : public llvm::ModulePass {
     static char ID;

@@ -1,5 +1,5 @@
-// This file is part of ASAP.
-// Please see LICENSE.txt for copyright and licensing information.
+// This file is modified from ASAP, used to identify user checks and sanitizer checks.
+// Note that ASAP only identifies sanitizer checks.
 
 #include "SCIPass.h"
 #include "utils.h"
@@ -16,7 +16,7 @@
 using namespace llvm;
 
 bool SCIPass::runOnModule(Module &M) {
-    errs() << "Start SCIPass on " << M.getSourceFileName() << "\n";
+    dbgs() << "Start SCIPass on " << M.getSourceFileName() << "\n";
     for (Function &F: M) {
         SanityCheckBlocks[&F] = BlockSet();
         SanityCheckInstructions[&F] = InstructionSet();
@@ -29,7 +29,7 @@ bool SCIPass::runOnModule(Module &M) {
             Inst->setMetadata("sanitycheck", MD);
         }
     }
-    errs() << "End SCIPass on " << M.getSourceFileName() << "\n";
+    dbgs() << "End SCIPass on " << M.getSourceFileName() << "\n";
     return true;
 }
 
@@ -184,5 +184,5 @@ bool SCIPass::onlyUsedInSanityChecks(Value* V) {
 
 char SCIPass::ID = 0;
 
-static RegisterPass<SCIPass> X("SCIPass",
+static RegisterPass<SCIPass> X("sci",
         "Finds branches belonging to sanity checks and user checks", false, false);

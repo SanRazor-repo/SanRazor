@@ -1,5 +1,4 @@
-// This file is part of ASAP.
-// Please see LICENSE.txt for copyright and licensing information.
+// This file is from ASAP to get the cost of each check.
 
 namespace llvm {
   class Instruction;

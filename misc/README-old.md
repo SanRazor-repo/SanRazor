@@ -20,14 +20,31 @@ bash build_autotrace.sh
 
 ## Install
 1. Download and install [LLVM](https://llvm.org/docs/GettingStarted.html) and [Clang](https://clang.llvm.org/get_started.html).
-Run the following command in Ubuntu 18.04/20.04 to complete this step:
+We run the following command in Ubuntu 18.04 to complete this step:
 ```
-bash download_llvm9.sh
-
+svn co http://llvm.org/svn/llvm-project/llvm/tags/RELEASE_900/final llvm
+cd llvm/tools
+svn co http://llvm.org/svn/llvm-project/cfe/tags/RELEASE_900/final clang
+cd ..
+cd tools/clang/tools
+svn co http://llvm.org/svn/llvm-project/clang-tools-extra/tags/RELEASE_900/final extra
+cd ../../..
+cd projects
+svn co http://llvm.org/svn/llvm-project/compiler-rt/tags/RELEASE_900/final compiler-rt
+cd ..
+cd projects
+svn co http://llvm.org/svn/llvm-project/libcxx/tags/RELEASE_900/final libcxx
+svn co http://llvm.org/svn/llvm-project/libcxxabi/tags/RELEASE_900/final libcxxabi
+cd ..
+mkdir build
+cd build
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="X86" ..
+make -j 12
+sudo make install
 ```
 2. Move the source code of SanRazor into your llvm project:
 ```
-cp -r SanRazor/src/SRPass llvm/lib/Transforms/
+cp SanRazor/src/SRPass llvm/lib/Transforms/
 cp SanRazor/src/SmallPtrSet.h llvm/include/llvm/ADT/
 ```
 3. Add the following command to `CMakeLists.txt` under `llvm/lib/Transforms`:
@@ -38,7 +55,6 @@ add_subdirectory(SRPass)
 ```
 cd llvm/build
 make -j 12
-sudo make install
 ```
 5. Install [ruby](https://www.ruby-lang.org/en/documentation/installation/) and make sure that the following libraries are installed in your system:
 ```
