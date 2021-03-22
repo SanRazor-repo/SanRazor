@@ -23,7 +23,6 @@ bash build_autotrace.sh
 Run the following command in Ubuntu 18.04/20.04 to complete this step:
 ```
 bash download_llvm9.sh
-
 ```
 2. Move the source code of SanRazor into your llvm project:
 ```
@@ -89,5 +88,7 @@ export SR_WORK_PATH="<path-to-this-file>/coverage.sh"
 SanRazor-clang -SR-opt -san-level=<> -use-asap=<>
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j 12
 ```
+3. To reproduce CVE results from scratch (e.g. if the above two steps generate some unexpected errors), you need to firstly unzip `Profiling.zip` under the source code folder of each software, which contains the workload and script for generating coverage information. Then, you can reproduce CVE results following step 1-5 in Section usage of SanRzor. 
+
 ## Acknowledgement
 We reuse some code from [ASAP](https://github.com/dslab-epfl/asap).
