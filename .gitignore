@@ -1,2 +1,4 @@
 *.tar.gz
 old_src/*
+llvm/*
+data/spec/*.txt
