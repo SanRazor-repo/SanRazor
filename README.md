@@ -59,13 +59,12 @@ SanRazor-clang -SR-init
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j 8
 ```
 3. Run your program with workload. The profiling result will be written into folder `$(pwd)/Cov`.
-4. Run the following command to perform sanitizer check reduction:
+4. Run the following command to perform sanitizer check reduction (Note that we provide the option of using ASAP first with `asap_budget` and running SanRazor later. If you do not want to use ASAP, set `-use-asap=1.0`):
 ```
 make clean
 SanRazor-clang -SR-opt -san-level=<L0/L1/L2> -use-asap=<asap_budget>
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j 8
 ```
-Note that we provide the option of using ASAP first with `asap_budget` and running SanRazor later. If you do not want to use ASAP, set `-use-asap=1.0`.
 5. Test your program after check reduction.
 
 ## Reproducing SPEC results
