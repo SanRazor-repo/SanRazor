@@ -2,22 +2,24 @@
 [![License](https://img.shields.io/github/license/SanRazor-repo/SanRazor?color=blue)](https://opensource.org/licenses/Apache-2.0)
 ![cmake](https://github.com/SanRazor-repo/SanRazor/workflows/CMake/badge.svg)
 
-SanRazor is a sanitizer check reduction tool aiming to incur little overhead while retaining all important sanitizer checks.
-# Paper submission
-The code snapshot for accompanying the manuscript "SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs". Our evaluation results can be reproduced from this snapshot. We will provide more documents and instructions to help reproducing the results during the artifact evaluation submission.
+SanRazor is a sanitizer check reduction tool aiming to incur little overhead while retaining all important sanitizer checks. 
+
+## Paper
+SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs. Jiang Zhang, Shuai Wang, Manuel Rigger, Pingjia He, and Zhendong Su. OSDI 2021 (conditional accept)
 
 ## Repository structure
 1. `src` contains the source code of SanRazor.
 2. `var` contains the evaluation results of SanRazor.
 3. `data` contains all the information for reproducing the evaluation results of SanRazor.
 
+# 1. Getting Started Instructions
 ## Quick install & test using docker
 ```
 docker build -f Dockerfile -t sanrazor:latest --shm-size=8g . 
 docker run -it sanrazor:latest
 bash build_autotrace.sh
 ```
-
+# 2. Detailed Instructions
 ## Install
 1. Download and install [LLVM](https://llvm.org/docs/GettingStarted.html) and [Clang](https://clang.llvm.org/get_started.html).
 Run the following command in Ubuntu 18.04/20.04 to complete this step:
