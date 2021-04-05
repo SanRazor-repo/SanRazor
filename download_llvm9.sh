@@ -1,3 +1,5 @@
+#!/bin/bash
+
 wget https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz
 tar -xf llvm-9.0.1.src.tar.xz
 rm -rf llvm-9.0.1.src.tar.xz
@@ -28,14 +30,3 @@ rm -rf *.src.tar.xz
 mv compiler-rt-9.0.1.src compiler-rt
 mv libcxx-9.0.1.src libcxx
 mv libcxxabi-9.0.1.src libcxxabi
-
-cd ..
-mkdir build
-cd build
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="X86" ..
-make -j 12
-
-# pushd projects/compiler-rt/lib/sanitizer_common
-# sed -e '1131 s|^|//|' \
-#     -i sanitizer_platform_limits_posix.cc
-# popd
