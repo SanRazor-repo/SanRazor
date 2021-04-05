@@ -3,3 +3,4 @@ old_src/*
 llvm/*
 data/spec/*.txt
 */.DS_Store
+var
