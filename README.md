@@ -1,19 +1,18 @@
-# SanRazor
+# SanRazor Artifact
 [![License](https://img.shields.io/github/license/SanRazor-repo/SanRazor?color=blue)](https://opensource.org/licenses/Apache-2.0)
 ![cmake](https://github.com/SanRazor-repo/SanRazor/workflows/CMake/badge.svg)
-
+## Overview
 SanRazor is a sanitizer check reduction tool aiming to incur little overhead while retaining all important sanitizer checks. 
 
-## Paper
+## Accepted paper
 SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs. Jiang Zhang, Shuai Wang, Manuel Rigger, Pingjia He, and Zhendong Su. OSDI 2021 (conditional accept)
 
-## Repository structure
+## Artifact structure
 1. `src` contains the source code of SanRazor.
-2. `var` contains the evaluation results of SanRazor.
-3. `data` contains all the information for reproducing the evaluation results of SanRazor.
+2. `data` contains all the information for reproducing the evaluation results of SanRazor.
 
-## Overview
-This artifact is supposed to reproduce Figure 4-5 (i.e. runtime performance on SPEC2006) and Table 2 (i.e. CVE Detectability) in this paper.
+## Purpose of this artifact
+This artifact is supposed to install SanRazor successfully and reproduce Figure 4-5 (i.e. runtime performance on SPEC2006) and Table 2 (i.e. CVE Detectability) in this paper.
 
 # 1. Getting Started Instructions
 ## Quick install & test using docker
