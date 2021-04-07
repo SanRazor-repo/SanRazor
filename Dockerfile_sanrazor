@@ -4,7 +4,6 @@ RUN apt-get -qqy update  && \
 RUN gem install bundler
 RUN gem install fileutils
 RUN gem install parallel
-# RUN gem install pathname
 RUN gem install shellwords
 COPY download_llvm9.sh /download_llvm9.sh
 COPY build_and_install_llvm9.sh /build_and_install_llvm9.sh

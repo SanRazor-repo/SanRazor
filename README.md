@@ -22,7 +22,7 @@ docker run -it sanrazor:latest
 bash test_autotrace.sh
 ```
 
-Note that this docker image is publicly available [here](https://hub.docker.com/r/sanrazor/sanrazor-snapshot), and it contains prebuilt LLVM9 and SanRazor.
+Note that this docker image is publicly available [here](https://hub.docker.com/r/sanrazor/sanrazor-snapshot), and it contains prebuilt LLVM9 and SanRazor. To build it from scratch, you can use `Dockerfile_sanrazor`.
 # 2. Detailed Instructions
 ## Prerequisite
 ```
