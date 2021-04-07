@@ -1,4 +1,4 @@
-# Module-lvel documentation for SanRazor
+# Module-level documentation for SanRazor
 1. `SCIPass.cpp`: identify all user checks and sanitizer checks.
 2. `DynamicCallCounter.cpp`: insert function calls for each user/sanitizer check in order to get its dynmaic patterns.
 3. `SRAnalysisPass.cpp`: 1) ananlyze the dynamic patterns and static patterns of user/sanitizer checks; 2) identify redundant sanitizer checks; 3) remove redundant sanitizer checks.
