@@ -19,7 +19,7 @@ This artifact is supposed to install SanRazor successfully and reproduce Figure 
 ```
 docker build -f Dockerfile -t sanrazor:latest --shm-size=8g . 
 docker run -it sanrazor:latest
-bash build_autotrace.sh
+bash test_autotrace.sh
 ```
 
 Note that this docker image is publicly available [here](https://hub.docker.com/r/sanrazor/sanrazor-snapshot), and it contains prebuilt LLVM9 and SanRazor.
@@ -42,7 +42,7 @@ sed -i '/unsigned short __pad1;/d' compiler-rt/lib/sanitizer_common/sanitizer_pl
 ``` 
 or 
 ```
-pushd projects/compiler-rt/lib/sanitizer_common
+pushd llvm/projects/compiler-rt/lib/sanitizer_common
 sed -e '1131 s|^|//|' \
     -i sanitizer_platform_limits_posix.cc
 popd
@@ -50,11 +50,11 @@ popd
 2. Move the source code of SanRazor into your llvm project:
 ```
 cp -r src/SRPass llvm/lib/Transforms/
-cp src/SmallPtrSet.h llvm/include/llvm/ADT/
 ```
-3. Add the following command to `CMakeLists.txt` under `llvm/lib/Transforms`:
+3. Run the following command to change `CMakeLists.txt` and `SmallPtrSet.h`:
 ```
-add_subdirectory(SRPass)
+sed -i '7i add_subdirectory(SRPass)' llvm/lib/Transforms/CMakeLists.txt
+sed -i "s/static_assert(SmallSize <= .*, \"SmallSize should be small\");/static_assert(SmallSize <= 1024, \"SmallSize should be small\");/g" llvm/include/llvm/ADT/SmallPtrSet.h
 ```
 4. Compile your llvm project again:
 ```

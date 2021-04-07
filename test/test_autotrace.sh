@@ -15,7 +15,7 @@ cp -r ../Profiling ./
 cd Profiling
 ./profiling.sh
 cd ../
-SanRazor-clang -SR-opt -san-level=L0 -use-asap=1.0
+SanRazor-clang -SR-opt -san-level=L2 -use-asap=1.0
 make clean
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="-Wall -Winline -g -O3 -fsanitize=address"  LDFLAGS="-fsanitize=address" -j 12
 
