@@ -4,3 +4,4 @@ llvm/*
 data/spec/*.txt
 */.DS_Store
 var
+data/python_asap
