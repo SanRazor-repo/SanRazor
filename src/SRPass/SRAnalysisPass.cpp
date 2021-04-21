@@ -68,7 +68,7 @@ bool SRAnalysisPass::runOnModule(Module &m) {
     FILE *fp_sc = fopen(Twine(InputSCOV).str().c_str(), "rb");
     FILE *fp_uc = fopen(Twine(InputUCOV).str().c_str(), "rb");
     if (fp_sc != NULL && fp_uc != NULL) {
-        dbgs() << "SRAnalysisPass on file: "<<filename << ", SC dynamic pattern file: " << Twine(InputSCOV).str().c_str() << "\n";
+        dbgs() << "SRAnalysisPass on file: "<<filename << ", SC dynamic pattern file: " << Twine(InputSCOV).str().c_str() << "L" "\n";
 
         uint64_t num_SC = 0, total_cost_SC = 0; // Number of SCs
         uint64_t num_UC = 0, total_cost_UC = 0; // Number of UCs

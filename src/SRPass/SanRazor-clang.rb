@@ -366,8 +366,8 @@ class SROptimizingCompiler < BaseCompiler
       puts "***********************"
       puts san_type
 
-      run!(find_opt(), '-load', 'SRPass.so', "-sr-analysis", "-scov=#{scov_name}", "-ucov=#{ucov_name}", "-log=#{log_name}", "-use-asap=#{threshold}", "-o", sr_name, orig_name)
-      run!(find_opt(), '-load', 'SRPass.so', "-sr-analysis", "-scov=#{scov_name}", "-ucov=#{ucov_name}", "-log=#{log_name}", "-use-asap=#{threshold}", "-o", srbc_name, orig_name)
+      run!(find_opt(), '-load', 'SRPass.so', "-sr-analysis", "-sropt-level=#{state.san_level}", "-scov=#{scov_name}", "-ucov=#{ucov_name}", "-log=#{log_name}", "-use-asap=#{threshold}", "-o", sr_name, orig_name)
+      run!(find_opt(), '-load', 'SRPass.so', "-sr-analysis", "-sropt-level=#{state.san_level}", "-scov=#{scov_name}", "-ucov=#{ucov_name}", "-log=#{log_name}", "-use-asap=#{threshold}", "-o", srbc_name, orig_name)
 
       
       opt_level = get_optlevel_for_llc(clang_args)
