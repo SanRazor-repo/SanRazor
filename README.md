@@ -111,13 +111,14 @@ export SR_WORK_PATH="<path-to-your-coverage.sh>/coverage.sh"
 SanRazor-clang -SR-init
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j $(nproc)
 ```
-5. Run `profiling.sh` script in `Profiling` folder. If everything goes well, you will see some text files in `SR_STATE_PATH`, containing the dynamic patterns of checks. 
+5. Run `profiling.sh` script in `Profiling` folder. If everything goes well, you will see some text files in `SR_STATE_PATH`, containing the dynamic patterns of checks. Make sure that you run `profiling.sh` properly and generate the dynmaic patterns of checks before entering into the next step (note that sometimes you need to modify `profiling.sh` the parent directory of the executable profiling program).
 6. Compile the source code with `SanRazor-clang` again to remove redundant checks:
 ```
 make clean
 SanRazor-clang -SR-opt -san-level=<L0/L1/L2> -use-asap=<asap_budget>
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j $(nproc)
 ```
+Please double check whether you set these FLAGS properly. For example, sometimes the `Makefile` may not contain variable like `LDFLAGS` (e.g. `mp3gain`). In this case, you have to revise the `Makefile` a bit and link the ASan/UBSan library properly.
 7. Run `badtest.sh` in `./cve-test` folder to check whether SanRazor can detect these CVEs. Note that test inputs for triggering CVEs are contained in `./cve-test/bad` folder. Some of test inputs in `./cve-test/bad` folder may not be used by `badtest.sh`, since the sanitizer checks protecting these CVE can not be removed by SanRazor. There are two reasons: 1) the sanitizer check can not be identified and removed by SanRazor (e.g. checks in sanitizer_common library); 2) the sanitizer check is not covered during profiling and has no dynamic patterns (i.e. SanRazor will definitely keep it).
 
 ## Acknowledgement
