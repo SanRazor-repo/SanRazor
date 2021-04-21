@@ -9,7 +9,7 @@ SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs. Jiang Zhang, Sh
 
 ## Artifact structure
 1. `src` contains the source code of SanRazor.
-2. `data` contains all the information for reproducing the evaluation results of SanRazor.
+2. `data` contains all the information for reproducing the evaluation results of SanRazor (SPEC_CPU2006 can be downloaded from [here](https://drive.google.com/file/d/1LAjc3MEfu_Hk3GRmUM8LmfqtUSNS8K5E/view?usp=sharing)).
 
 ## Purpose of this artifact
 This artifact is supposed to install SanRazor successfully and reproduce Figure 4-5 (i.e. runtime performance on SPEC2006) and Table 2 (i.e. CVE Detectability) in this paper.
