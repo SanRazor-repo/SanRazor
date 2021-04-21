@@ -15,7 +15,7 @@ SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs. Jiang Zhang, Sh
 This artifact is supposed to install SanRazor successfully and reproduce Figure 4-5 (i.e. runtime performance on SPEC2006) and Table 2 (i.e. CVE Detectability) in this paper.
 
 ## Getting Started Instructions
-### 1. Quick install & test using docker
+### 1. Quickly install & test using docker
 ```
 docker build -f Dockerfile -t sanrazor:latest --shm-size=8g . 
 docker run -it sanrazor:latest
