@@ -14,8 +14,8 @@ SanRazor: Reducing Redundant Sanitizer Checks in C/C++ Programs. Jiang Zhang, Sh
 ## Purpose of this artifact
 This artifact is supposed to install SanRazor successfully and reproduce Figure 4-5 (i.e. runtime performance on SPEC2006) and Table 2 (i.e. CVE Detectability) in this paper.
 
-# 1. Getting Started Instructions
-## Quick install & test using docker
+## 1. Getting Started Instructions
+### Quick install & test using docker
 ```
 docker build -f Dockerfile -t sanrazor:latest --shm-size=8g . 
 docker run -it sanrazor:latest
@@ -23,12 +23,12 @@ bash test_autotrace.sh
 ```
 
 Note that this docker image is publicly available [here](https://hub.docker.com/r/sanrazor/sanrazor-snapshot), and it contains prebuilt LLVM9 and SanRazor. To build it from scratch, you can use `Dockerfile_sanrazor`.
-# 2. Detailed Instructions
-## Prerequisite
+## 2. Detailed Instructions
+### Prerequisite
 ```
 wget xz-utils cmake make g++ python3 python3-distutils
 ```
-## Install
+### Install
 1. Download and install [LLVM](https://llvm.org/docs/GettingStarted.html) and [Clang](https://clang.llvm.org/get_started.html).
 Run the following command in Ubuntu 18.04/20.04 to complete this step:
 ```
@@ -68,7 +68,7 @@ gem install pathname
 gem install shellwords
 ```
 
-## Usage of SanRazor
+### Usage of SanRazor
 1. Initialization by the following code:
 ```
 export SR_STATE_PATH="$(pwd)/Cov"
@@ -88,7 +88,7 @@ make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS=
 ```
 5. Test your program after check reduction.
 
-## Reproducing SPEC results
+### Reproducing SPEC results
 1. Install [SPEC CPU2006 Benchmark](https://www.spec.org/cpu2006/).
 2. Run the following code under `SPEC_CPU2006v1.0/` to activate the spec environment:
 ```
@@ -100,7 +100,7 @@ source shrc
 ```
 4. See the evaluation reports under `SPEC_CPU2006v1.0/result`.
 
-## Reproducing CVE results
+### Reproducing CVE results
 1. Unzip `X-Y.tar.gz` to get the source code of software `X` with version `Y`.
 2. Compile the source code using clang/gcc to see if there are any errors. Note that sometimes you need to firstly generate Makefile by running the configure script.
 3. Unzip `Profiling.zip` under the source code folder of each software, which contains the workload and script for generating coverage information.
@@ -119,6 +119,7 @@ SanRazor-clang -SR-opt -san-level=<L0/L1/L2> -use-asap=<asap_budget>
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j $(nproc)
 ```
 Please double check whether you set these FLAGS properly. For example, sometimes the `Makefile` may not contain variable like `LDFLAGS` (e.g. `mp3gain`). In this case, you have to revise the `Makefile` a bit and link the ASan/UBSan library properly.
+
 7. Run `badtest.sh` in `./cve-test` folder to check whether SanRazor can detect these CVEs. Note that test inputs for triggering CVEs are contained in `./cve-test/bad` folder. Some of test inputs in `./cve-test/bad` folder may not be used by `badtest.sh`, since the sanitizer checks protecting these CVE can not be removed by SanRazor. There are two reasons: 1) the sanitizer check can not be identified and removed by SanRazor (e.g. checks in sanitizer_common library); 2) the sanitizer check is not covered during profiling and has no dynamic patterns (i.e. SanRazor will definitely keep it).
 
 ## Acknowledgement
