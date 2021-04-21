@@ -47,19 +47,23 @@ sed -e '1131 s|^|//|' \
     -i sanitizer_platform_limits_posix.cc
 popd
 ```
+
 2.2. Move the source code of SanRazor into your llvm project:
 ```
 cp -r src/SRPass llvm/lib/Transforms/
 ```
+
 2.3. Run the following command to change `CMakeLists.txt` and `SmallPtrSet.h` (also see `src/patch.sh`):
 ```
 sed -i '7i add_subdirectory(SRPass)' llvm/lib/Transforms/CMakeLists.txt
 sed -i "s/static_assert(SmallSize <= .*, \"SmallSize should be small\");/static_assert(SmallSize <= 1024, \"SmallSize should be small\");/g" llvm/include/llvm/ADT/SmallPtrSet.h
 ```
+
 2.4. Compile your llvm project again:
 ```
 ./build_and_install_llvm9.sh
 ```
+
 2.5. Install [ruby](https://www.ruby-lang.org/en/documentation/installation/) and make sure that the following libraries are installed in your system:
 ```
 gem install fileutils
@@ -75,35 +79,45 @@ export SR_STATE_PATH="$(pwd)/Cov"
 export SR_WORK_PATH="<path-to-your-coverage.sh>/coverage.sh"
 SanRazor-clang -SR-init
 ```
+
 3.2. Set your compiler for C/C++ program as `SanRazor-clang`/`SanRazor-clang++` (`CC=SanRazor-clang`/`CXX=SanRazor-clang++`), and run the following command:
 ```
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j $(nproc)
 ```
+
 3.3. Run your program with workload. The profiling result will be written into folder `$(pwd)/Cov`.
+
 3.4. Run the following command to perform sanitizer check reduction (Note that we provide the option of using ASAP first with `asap_budget` and running SanRazor later. If you do not want to use ASAP, set `-use-asap=1.0`):
 ```
 make clean
 SanRazor-clang -SR-opt -san-level=<L0/L1/L2> -use-asap=<asap_budget>
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j $(nproc)
 ```
+
 3.5. Test your program after check reduction.
 
 ### 4. Reproducing SPEC results
 4.1. Install [SPEC CPU2006 Benchmark](https://www.spec.org/cpu2006/).
+
 4.2. Run the following code under `SPEC_CPU2006v1.0/` to activate the spec environment:
 ```
 source shrc
 ```
+
 4.3. Run the following script to evaluate SanRazor on SPEC CPU2006 Benchmark under `data/spec/`:
 ```
 ./run_spec_SR.sh <asan/ubsan> <L0/L1/L2> <test/ref>
 ```
+
 4.4. See the evaluation reports under `SPEC_CPU2006v1.0/result`.
 
 ### 5. Reproducing CVE results
 5.1. Unzip `X-Y.tar.gz` to get the source code of software `X` with version `Y`.
+
 5.2. Compile the source code using clang/gcc to see if there are any errors. Note that sometimes you need to firstly generate Makefile by running the configure script.
+
 5.3. Unzip `Profiling.zip` under the source code folder of each software, which contains the workload and script for generating coverage information.
+
 5.4. Compile the source code with `SanRzor-clang`:
 ```
 export SR_STATE_PATH="$(pwd)/Cov"
@@ -112,6 +126,7 @@ SanRazor-clang -SR-init
 make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS="..." -j $(nproc)
 ```
 5.5. Run `profiling.sh` script in `Profiling` folder. If everything goes well, you will see some text files in `SR_STATE_PATH`, containing the dynamic patterns of checks. Make sure that you run `profiling.sh` properly and generate the dynmaic patterns of checks before entering into the next step (note that sometimes you need to modify `profiling.sh` the parent directory of the executable profiling program).
+
 5.6. Compile the source code with `SanRazor-clang` again to remove redundant checks:
 ```
 make clean
