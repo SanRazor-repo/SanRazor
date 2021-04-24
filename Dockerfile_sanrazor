@@ -14,4 +14,4 @@ RUN sed -i "s/static_assert(SmallSize <= .*, \"SmallSize should be small\");/sta
 RUN chmod -R 777 /build_and_install_llvm9.sh
 RUN /build_and_install_llvm9.sh
 COPY data/cve/auto-asan /auto-asan
-COPY test/test_autotrace.sh /test_autotrace.sh
+COPY test/test_autotrace_asan.sh /test_autotrace_asan.sh
