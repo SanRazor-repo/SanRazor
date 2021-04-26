@@ -23,6 +23,14 @@ bash test_autotrace.sh
 ```
 
 Note that this docker image is publicly available [here](https://hub.docker.com/r/sanrazor/sanrazor-snapshot), and it contains prebuilt LLVM9 and SanRazor. To build it from scratch, you can use `Dockerfile_sanrazor`.
+### 2. Example of quickly reproducing CVEs in docker
+```
+docker build -f Dockerfile -t sanrazor:latest --shm-size=8g . 
+docker run -it sanrazor:latest
+cd /CVE
+bash test_mp3gain_asan.sh 2 &> mp3gain_asan_L2.txt
+```
+
 ## Detailed Instructions
 ### 1. Prerequisite
 ```
