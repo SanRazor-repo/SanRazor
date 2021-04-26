@@ -1,35 +1,9 @@
 #!/bin/bash
 #set -e
 
-#!/bin/bash
-#set -e
-
-# cd test
-# testfiles=$(ls)
-# for element in $testfiles
-# do
-#     if [ ${element:0:8} == "tiffcrop" ]
-#     then
-#         $path$element
-#     fi
-# done
-
-# for element in $testfiles
-# do
-#     if [ ${element:0:6} == "tiffcp" ]
-#     then
-#         $path$element
-#     fi
-# done
-
-# for element in $testfiles
-# do
-#     if [ ${element:0:8} == "tiff2pdf" ]
-#     then
-#         $path$element
-#     fi
-# done
-# cd ../
+# Please unzip tif.zip and put it under ./tiff-4.0.7/test folder
+# This script should run in ./tiff-4.0.7
+# You can ignore any errors generated during profiling.
 
 path="./test/tif/"
 cd ./test/tif
