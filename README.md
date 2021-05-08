@@ -119,7 +119,7 @@ source shrc
 
 4.4. Run the following script to run SPEC CPU2006 Benchmark without SanRazor under `data/spec/`:
 ```
-./run_spec_SR.sh <asan/ubsan/default> <test/ref>
+./run_spec.sh <asan/ubsan/default> <test/ref>
 ```
 
 4.5. See the evaluation reports under `SPEC_CPU2006v1.0/result`.
