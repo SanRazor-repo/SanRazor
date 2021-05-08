@@ -112,12 +112,17 @@ make CC=SanRazor-clang CXX=SanRazor-clang++ CFLAGS="..." CXXFLAGS="..." LDFLAGS=
 source shrc
 ```
 
-4.3. Run the following script to evaluate SanRazor on SPEC CPU2006 Benchmark under `data/spec/`:
+4.3. Run the following script to run SPEC CPU2006 Benchmark with SanRazor+ASan/UBSan under `data/spec/`:
 ```
 ./run_spec_SR.sh <asan/ubsan> <L0/L1/L2> <test/ref>
 ```
 
-4.4. See the evaluation reports under `SPEC_CPU2006v1.0/result`.
+4.4. Run the following script to run SPEC CPU2006 Benchmark without SanRazor under `data/spec/`:
+```
+./run_spec_SR.sh <asan/ubsan/default> <test/ref>
+```
+
+4.5. See the evaluation reports under `SPEC_CPU2006v1.0/result`.
 
 ### 5. Reproducing CVE results
 5.1. Unzip `X-Y.tar.gz` to get the source code of software `X` with version `Y`.
