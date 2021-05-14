@@ -1,3 +1,7 @@
+cd ../../../SPEC_CPU2006v1.0
+source shrc
+cd ../SanRazor/data/spec
+
 echo "Running spec with SanRazor+ASan+L0 >>>"
 ./run_spec_SR.sh asan L0 $1 &> asan_L0.txt
 
