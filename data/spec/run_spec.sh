@@ -13,6 +13,7 @@ ALL_BENCHMARKS="
    470.lbm
    482.sphinx3
    444.namd
+   453.povray
 "
 
 #no ubsan h264ref
