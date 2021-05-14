@@ -1,3 +1,4 @@
+#!/bin/bash
 cd ../../../SPEC_CPU2006v1.0
 source shrc
 cd ../SanRazor/data/spec
