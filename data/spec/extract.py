@@ -18,11 +18,12 @@ BENCHMARKS = [
     "433.milc",
     "470.lbm",
     "482.sphinx3",
-    "444.namd"
+    "444.namd",
+    "453.povray"
 ]
 
 for benchmark in BENCHMARKS:
-    check_stat_file = "{}/SPEC_CPU2006v1.0/benchspec/CPU2006/{}/run/build_peak_{}.0000/Cov/check.txt".format(spec_path, benchmark, setup)
+    check_stat_file = "{}/SPEC_CPU2006v1.0/benchspec/CPU2006/{}/run/build_peak_{}.0001/Cov/check.txt".format(spec_path, benchmark, setup)
     try:
         with open(check_stat_file, 'r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=' ')

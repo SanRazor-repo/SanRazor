@@ -3,17 +3,11 @@
 # This is a wrapper script around clang, ar, ranlib, etc., to perform the
 # different SanRazor compilation steps:
 #
-# - First step: -SanRazor-init
+# - First step: -SR-init
 #   Creates the SanRazor state directory, which contains all the additional files
 #   that SanRazor manages throughout a compilation.
 #   After SanRazor-init, the software is ready to be compiled.
-# - Second step: -SanRazor-coverage
-#   Prepares the compilation with coverage instrumentation. After this step,
-#   the software should be compiled again, and the resulting binary will be
-#   instrumented for coverage.
-# - Third step: -SanRazor-compute-costs
-#   Collects sanity checks and computes their costs
-# - Fourth step: -SanRazor-optimize
+# - Second step: -SR-opt -SR-opt -san-level=>L0/L1/L2>
 #   Prepares for optimized compilation. Running make/ninja again after this
 #   should result in an optimized binary.
 
